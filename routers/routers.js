@@ -1,20 +1,49 @@
 let router = require('express').Router();
-const controller = require('../controllers/controller');
+const { check } = require("express-validator");
 
-// Adding a User to Users
-router.post('/register', controller.addUser)
+const { token } = require('../controllers/commonController');
+const usrCtrl = require('../controllers/userController');
+const authCtrl = require('../controllers/authController');
 
-// Reading a User from Users
-router.get('/getallusers', controller.getAllUsers)
+/**
+ * 
+ * USER ROUTERS
+ */
 
-// Reading a User from Users
-router.get('/getuser/:id', controller.getUserList)
+// Adding a Employer/ Employee to Users
+router.post('/register', token, usrCtrl.addUser)
 
-// Updating the User
-router.post('/update/:id', controller.updateUser)
+// Reading All Employer/ Employee based on Employer Id from Users
+router.post('/get-all-users', token, usrCtrl.getAllUsers)
 
-// Deleting the User from Users
-router.delete('/delete/:id', controller.deleteUser)
+// Verify Employee
+router.put('/verify-employee/:id', token, usrCtrl.verifyEmployee)
+
+// Updating the Employer/ Employee
+router.put('/update-user/:id', token, usrCtrl.updateUser)
+
+// Deleting the Employer/ Employee from Users
+router.delete('/delete-user/:id', token, usrCtrl.deleteUser)
+
+/**
+ * AUTH ROUTERS
+ */
+
+// Register as an Employer
+router.post('/sign-up',
+    [
+        check('email', 'Please enter a valid email').isEmail(),
+        check('password', 'Please enter a valid password, password should be of minimum 6 characters.').isLength({min: 6})
+    ], authCtrl.signUp);
+
+// Login as an Employer/Employee
+router.post('/sign-in',
+    [
+        check('password', 'Please enter a valid password').isLength({min: 1})
+    ], authCtrl.signIn);
+
+// Check if user logged In
+router.post('/check', token, authCtrl.checkAuth);
 
 // Export API routes
 module.exports = router;
