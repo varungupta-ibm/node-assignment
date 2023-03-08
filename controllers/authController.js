@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { body, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const { encodePassword } = require("./commonController");
 
 const Users = require('../models/users');
@@ -26,6 +26,7 @@ exports.signUp = async (req, res) => {
 
     if (user) {
         return res.status(400).json({
+            status: 400,
             msg: "User already exists. Please try loggin in with your account credentials."
         });
     }
@@ -54,16 +55,25 @@ exports.signUp = async (req, res) => {
                         if (err) {
                             console.error('ERR___', err);
                             res.status(500).json({
+                                status: 500,
                                 message: "Server Error !"
                             });
                         }
                         else {
                             let message = utype === "EMPLOYEE" ? "Please wait for your employer to get verified." : "Successfully registered as an Employer.";
-                            res.status(200).json({
-                                status: 200,
-                                token: token,
-                                message: message
-                            });
+                            if (utype === "EMPLOYEE") {
+                                res.status(200).json({
+                                    status: "PENDING",
+                                    message: message
+                                });
+                            } else {
+                                res.status(200).json({
+                                    status: "SUCCESS",
+                                    token: token,
+                                    message: message
+                                });
+                            }
+                            
                         }
                     }
                 );
@@ -97,17 +107,20 @@ exports.signIn = async (req, res) => {
         });
         if (!user)
             return res.status(400).json({
-                message: "User doesn't exists. Please sign up with if you are an employer or ask your employer to add yourself if you are an employee."
+                status: 400,
+                message: "User doesn't exists."
             });
 
         const isMatch = await bcrypt.compare(password, user.token);
         if (!isMatch)
             return res.status(400).json({
+                status: 400,
                 message: "Password you have entered is incorrect."
             });
 
         if (!user.verified) {
             return res.status(400).json({
+                status: 400,
                 message: "Your account is not yet verified."
             });
         }
@@ -130,6 +143,7 @@ exports.signIn = async (req, res) => {
                     'auth-token': token
                 });
                 res.status(200).json({
+                    status: 200,
                     message: "You are successfully logged into the application!",
                     token: token
                 });
@@ -138,6 +152,7 @@ exports.signIn = async (req, res) => {
     } catch (e) {
         console.error(e);
         res.status(500).json({
+            status: 500,
             message: "Server Error"
         });
     }
@@ -159,6 +174,7 @@ exports.checkAuth = async (req, res) => {
     } catch (e) {
         console.error(e);
         res.status(500).json({
+            status: 500,
             message: "Server Error"
         });
     }

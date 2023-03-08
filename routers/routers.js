@@ -11,10 +11,13 @@ const authCtrl = require('../controllers/authController');
  */
 
 // Adding a Employer/ Employee to Users
-router.post('/register', token, usrCtrl.addUser)
+router.post('/add-users', token, usrCtrl.addUser)
 
 // Reading All Employer/ Employee based on Employer Id from Users
 router.post('/get-all-users', token, usrCtrl.getAllUsers)
+
+// Reading All Employers from Users
+router.get('/list-employers', usrCtrl.listEmployers)
 
 // Verify Employee
 router.put('/verify-employee/:id', token, usrCtrl.verifyEmployee)

@@ -7,8 +7,8 @@ var salt = bcrypt.genSaltSync(10);
  * --------------
  */
 
-const generateToken = (req, res, next) => {
-    const token = req.header("user-token");
+const verifyToken = (req, res, next) => {
+    const token = req.header("Authorization");
     if (!token) return res.status(401).json({ message: "You are not authorised to do this action." });
 
     try {
@@ -28,5 +28,5 @@ const encodePassword = (password, callback) => {
     });
 }
 
-module.exports.token = generateToken;
+module.exports.token = verifyToken;
 module.exports.encodePassword = encodePassword;

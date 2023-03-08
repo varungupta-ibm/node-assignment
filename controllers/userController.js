@@ -157,3 +157,31 @@ exports.getAllUsers = (req, res) => {
         });
     }
 };
+
+exports.listEmployers = (req, res) => {
+
+    Users.find({ type: "EMPLOYER" })
+        .then(response => {
+            let usrArr = [];
+            if (response && response.length) {
+                response.forEach(user => {
+                    let userObj = {
+                        "id": user._id,
+                        "name": user.name
+                    };
+                    usrArr.push(userObj);
+                });
+            }
+            res.json({
+                status: 200,
+                data: usrArr
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+                status: 500,
+                message: "Couldn't get the user !"
+            });
+        })
+};
