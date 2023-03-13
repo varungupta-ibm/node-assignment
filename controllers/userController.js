@@ -98,7 +98,7 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-    Users.remove({ _id: req.params.id }).then(() => {
+    Users.deleteOne({ _id: req.params.id }).then(() => {
         res.send('user deleted')
     }).catch((err) => {
         console.log(err)

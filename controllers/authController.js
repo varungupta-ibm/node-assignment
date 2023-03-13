@@ -168,8 +168,19 @@ exports.checkAuth = async (req, res) => {
     }
     try {
         // request.user is getting fetched from Middleware after token authentication
-        const user = await Users.findById(req.user.id);
-        res.json(user);
+        const user = await Users.findById(req.user._id);
+        if (user) {
+            res.json({
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                type: user.type,
+                verified: user.verified
+            });
+        } else {
+            res.json(null);
+        }
 
     } catch (e) {
         console.error(e);
