@@ -1,0 +1,99 @@
+[{
+  "_id": {
+    "$oid": "640ac85a72bedc4146daddcf"
+  },
+  "name": "Company One",
+  "email": "company1@gmail.com",
+  "phone": {
+    "$numberLong": "3456342124"
+  },
+  "type": "EMPLOYER",
+  "adminId": "",
+  "token": "$2a$10$v0/aOxleo0du6lyRQLMhxe/4rfzA6dB0wkNOVh5lmWnOkgc4soNo.",
+  "verified": true,
+  "active": true,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678428178807"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640ac86d72bedc4146daddd2"
+  },
+  "name": "Company Two",
+  "email": "company2@gmail.com",
+  "phone": {
+    "$numberLong": "3456342124"
+  },
+  "type": "EMPLOYER",
+  "adminId": "",
+  "token": "$2a$10$v0/aOxleo0du6lyRQLMhxe/4rfzA6dB0wkNOVh5lmWnOkgc4soNo.",
+  "verified": true,
+  "active": true,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678428178807"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640ac95a72bedc4146daddd9"
+  },
+  "name": "User One",
+  "email": "user1@company1.com",
+  "phone": 1234567890,
+  "type": "EMPLOYEE",
+  "adminId": "640ac85a72bedc4146daddcf",
+  "token": "$2a$10$v0/aOxleo0du6lyRQLMhxe/4rfzA6dB0wkNOVh5lmWnOkgc4soNo.",
+  "verified": true,
+  "active": true,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678428178807"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640ac98c72bedc4146dadde0"
+  },
+  "name": "User 3",
+  "email": "user3@company1.com",
+  "phone": {
+    "$numberLong": "3453333334"
+  },
+  "type": "EMPLOYEE",
+  "adminId": "640ac85a72bedc4146daddcf",
+  "token": "$2a$10$v0/aOxleo0du6lyRQLMhxe/4rfzA6dB0wkNOVh5lmWnOkgc4soNo.",
+  "verified": false,
+  "active": true,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678428178807"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "640ac9b172bedc4146dadde4"
+  },
+  "name": "User Four",
+  "email": "user4@company2.com",
+  "phone": {
+    "$numberLong": "3456342124"
+  },
+  "type": "EMPLOYEE",
+  "adminId": "640ac86d72bedc4146daddd2",
+  "token": "$2a$10$v0/aOxleo0du6lyRQLMhxe/4rfzA6dB0wkNOVh5lmWnOkgc4soNo.",
+  "verified": false,
+  "active": true,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1678428178807"
+    }
+  },
+  "__v": 0
+}]
